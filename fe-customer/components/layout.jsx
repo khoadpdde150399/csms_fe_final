@@ -19,7 +19,9 @@ const Layout = ({ children }) => {
     });
 
     // Effect để load TalkJS
-
+    useEffect(() => {
+        Talk.ready.then(() => setTalkLoaded(true));
+    }, []);
 
     // Effect để set customer info
     useEffect(() => {
@@ -37,9 +39,52 @@ const Layout = ({ children }) => {
     }, [data]);
 
     // Setup chat function
+    const setupChat = useCallback(() => {
+        if (!talkLoaded || !customerInfor) {
+            console.log("Talk not loaded or no customer info yet");
+            return;
+        }
 
+        try {
+            const user = new Talk.User({
+                id: customerInfor.email,
+                name: customerInfor.customerName,
+                email: customerInfor.email,
+                photoUrl: 'https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3467.jpg',
+                welcomeMessage: 'Hi!',
+            });
+
+            const staffUser = new Talk.User({
+                id: 'staff-id',
+                name: 'Support Staff',
+                email: 'staff@example.com',
+                photoUrl: 'https://talkjs.com/new-web/avatar-2.jpg',
+                welcomeMessage: 'Hello! How can I assist you today?',
+            });
+
+            const session = new Talk.Session({
+                appId: 'th2sJikw',
+                me: user,
+            });
+
+            const conversation = session.getOrCreateConversation(Talk.oneOnOneId(user, staffUser));
+            conversation.setParticipant(user);
+            conversation.setParticipant(staffUser);
+
+            const popup = session.createPopup({ keepOpen: true });
+            popup.select(conversation);
+            popup.mount(document.getElementById("talkjs-popup"));
+        } catch (error) {
+            console.error("Error setting up chat:", error);
+        }
+    }, [talkLoaded, customerInfor]);
     // Effect để setup chat khi điều kiện đã sẵn sàng
-
+    useEffect(() => {
+        if (talkLoaded && customerInfor && !isLoading) {
+            console.log("Setting up chat with:", customerInfor);
+            setupChat();
+        }
+    }, [talkLoaded, customerInfor, isLoading, setupChat]);
 
     // useEffect(() => {
     //     // Tự động hiển thị popup khi trang tải
