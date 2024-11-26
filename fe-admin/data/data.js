@@ -1,4 +1,12 @@
 export const menu = [
+
+    {
+        title: 'User Management',
+        href: '/user/manage',
+        list: [
+
+        ],
+    },
     
     {
         title: 'Category Management',
