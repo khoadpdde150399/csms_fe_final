@@ -1,6 +1,14 @@
 export const menu = [
 
     {
+        title:'Statistical',
+        href: '/statistical/manage',
+        list: [
+
+        ],
+    },
+
+    {
         title: 'User Management',
         href: '/user/manage',
         list: [
@@ -25,6 +33,14 @@ export const menu = [
     {
         title: 'Orders Management',
         href: '/order/manage',
+        list: [
+
+        ],
+    },
+
+    {
+        title: 'Counpon Management',
+        href: '/coupon/manage',
         list: [
 
         ],
