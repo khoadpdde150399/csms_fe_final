@@ -44,7 +44,56 @@ const NotificationDropdown = () => {
         }
     };
 
-
+    const NotificationListContent = () => (
+        <List
+            loading={loading}
+            style={{ 
+                width: 400, // Tăng từ 300px lên 400px
+                maxHeight: 500, // Tăng từ 400px lên 500px để hiển thị nhiều nội dung hơn
+                overflow: 'auto',
+                backgroundColor: 'white',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                borderRadius: '4px',
+                zIndex: 1000,
+                padding: '10px' // Thêm padding để nội dung không sát viền
+            }}
+            itemLayout="horizontal"
+            dataSource={notificationList}
+            locale={{ emptyText: 'No notification' }}
+            footer={
+                <div style={{ textAlign: 'center', padding: '10px 0' }}>
+                    <Link href="/account/notification">View all notifications</Link>
+                </div>
+            }
+            renderItem={(item) => (
+                <List.Item style={{ padding: '12px 8px' }} > {/* Thêm padding cho mỗi item */}
+                    <List.Item.Meta
+                        onClick={() => handleReadClick(item.id)}
+                        avatar={<Avatar icon={<BellFilled />} size="default" />} // Tăng kích thước avatar
+                        title={
+                            <span style={{ 
+                                color: '#1890ff',
+                                fontSize: '16px', // Tăng kích thước chữ
+                                fontWeight: '500' 
+                            }}>
+                                {item.content}
+                            </span>
+                        }
+                        description={
+                            <div>
+                                <small style={{ 
+                                    color: '#999',
+                                    fontSize: '12px' 
+                                }}>
+                                    {formatTime(item.created_at)}
+                                </small>
+                            </div>
+                        }
+                    />
+                </List.Item>
+            )}
+        />
+    );
 
     return (
         <li style={{marginLeft:'-15px'}} className="cart inner-item menu-item fw-bold text-uppercase">
