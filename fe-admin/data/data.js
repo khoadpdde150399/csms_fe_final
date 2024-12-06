@@ -1,4 +1,8 @@
 export const menu = [
+    {
+        title:'Statistical',
+        href: '/statistical/manage',
+        list: [
 
         ],
     },
@@ -30,5 +34,19 @@ export const menu = [
 
         ],
     },
-   
+    {
+        title: 'Counpon Management',
+        href: '/coupon/manage',
+        list: [
+
+        ],
+    },
+    {
+        title: 'Message Management',
+        href: '/chat/manage',
+        list: [
+
+        ],
+    }
+
 ]
