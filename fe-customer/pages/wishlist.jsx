@@ -1,3 +1,4 @@
+
 import { useQuery } from '@tanstack/react-query';
 import { Empty } from 'antd';
 import { useRouter } from 'next/router';
@@ -95,12 +96,6 @@ const WishlistPage = () => {
                 @media (max-width: 768px) {
                     .product-list {
                         grid-template-columns: repeat(2, 1fr);
-                    }
-                }
-
-                @media (max-width: 480px) {
-                    .product-list {
-                        grid-template-columns: 1fr;
                     }
                 }
             `}</style>

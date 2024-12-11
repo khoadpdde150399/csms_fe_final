@@ -40,10 +40,10 @@ const OrderHistoryPage = () => {
     return (
         <div className="order-history-page container">
             <div className="row">
-                <div className="col-4">
+                <div className="col-12 col-md-4">
                     <AccountSidebar />
                 </div>
-                <div className="col-8">
+                <div className="col-12 col-md-8">
                     <div className="orders-tab">
                         <div className="title">
                             {orderList.length == 0

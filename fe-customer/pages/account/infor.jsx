@@ -1,3 +1,4 @@
+
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
@@ -45,20 +46,20 @@ const CustomerInforPage = () => {
                 address: response?.data?.address
             };
             queryClient.setQueryData(['customer', 'infor'], { data: customerInfor })
-            swtoast.success({ text: 'Cập nhật tài khoản thành công' });
+            swtoast.success({ text: 'Account update successful' });
         } catch (err) {
             console.log(err);
-            swtoast.error({ text: 'Có lỗi khi cập nhật tài khoản vui lòng thử lại!' });
+            swtoast.error({ text: 'Error updating account please try again!' });
         }
     }, [queryClient])
 
     return (
         <div className='customer-info-page container'>
             <div className="account-infor row">
-                <div className="col-4">
+                <div className="col-12 col-md-4">
                     <AccountSidebar />
                 </div>
-                <div className="col-8">
+                <div className="col-12 col-md-8">
                     {
                         customerInfor &&
                         <CustomerInforForm
