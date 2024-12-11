@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { memo } from 'react';
@@ -14,7 +15,7 @@ const AccountSidebar = () => {
 
     return (
         <div className="account-sidebar">
-            <div className="title">Thông tin khách hàng</div>
+            <div className="title">Customer information</div>
             <div className="sidebar-items">
                 {sidebar &&
                     sidebar.map((item, index) => {
@@ -61,6 +62,8 @@ const AccountSidebar = () => {
                                     allowEscapeKey: false,
                                     showCancelButton: true,
                                     showLoaderOnConfirm: true,
+                                    confirmButtonText: 'Accept', // Thêm text cho nút confirm
+                                    cancelButtonText: 'Cancel',   // Thêm text cho nút cancel
                                     preConfirm: async () => {
                                         try {
                                             await customerService.logout();
@@ -70,22 +73,22 @@ const AccountSidebar = () => {
                                             return { isError: true };
                                         }
                                     },
-                                    title: 'Đăng xuất',
+                                    title: 'Log out',
                                     icon: 'warning',
-                                    text: 'Bạn muốn đăng xuất?',
+                                    text: 'Do you want to log out?',
                                 })
                                 .then(async (result) => {
                                     if (result.isConfirmed && !result.value?.isError) {
                                         setCustomerLogout();
-                                        swtoast.success({ text: 'Đăng xuất thành công!' });
+                                        swtoast.success({ text: 'Logout successful!' });
                                     } else if (result.isConfirmed && result.value?.isError) {
                                         setCustomerLogout();
-                                        swtoast.success({ text: 'Đăng xuất thành công!' });
+                                        swtoast.success({ text: 'Logout successful!' });
                                     }
                                 });
                         }}
                     >
-                        Đăng xuất
+                        Log Out
                     </Link>
                 }
             </div>

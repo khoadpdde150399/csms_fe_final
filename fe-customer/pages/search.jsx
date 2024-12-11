@@ -1,3 +1,4 @@
+
 import { useQuery } from '@tanstack/react-query';
 import { Empty, Pagination } from 'antd';
 import { useState } from 'react';
@@ -97,12 +98,6 @@ const SearchPage = () => {
                 @media (max-width: 768px) {
                     .product-list {
                         grid-template-columns: repeat(2, 1fr);
-                    }
-                }
-
-                @media (max-width: 480px) {
-                    .product-list {
-                        grid-template-columns: 1fr;
                     }
                 }
             `}</style>

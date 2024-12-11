@@ -1,3 +1,4 @@
+
 import { swtoast } from '@/mixins/swal.mixin.js';
 import { StarFilled } from '@ant-design/icons';
 import { useQuery } from '@tanstack/react-query';
@@ -107,10 +108,10 @@ const ProductDetailPage = () => {
     return (
         <div className="product-detail-page container">
             <div className="row main-infor-product">
-                <div className="col-4">
+                <div className="col-12 col-md-4 image-product">
                     {productImageList && <CarouselFade imageList={productImageList} />}
                 </div>
-                <div className="col-8">
+                <div className="col-12 col-md-8">
                     <h6 className="product-name">{productName && productName}</h6>
                     <div className="rating d-flex align-items-center">
                         <span className="d-flex align-items-center">
@@ -193,7 +194,7 @@ const ProductDetailPage = () => {
             <div className="review-box position-relative d-flex align-items-center">
                 <div className="">
                     <h5 className="feedback_quantify-detail d-inline-block">
-                        {feedbackQuantity > 0 ? `${feedbackQuantity} Đánh giá` : 'This product has no reviews yet.'}
+                        {feedbackQuantity > 0 ? `${feedbackQuantity} Feedbacks` : 'This product has no reviews yet.'}
                     </h5>
                     {feedbackQuantity > 0 ?
                         <h5 className="rating-detail d-inline-block">
