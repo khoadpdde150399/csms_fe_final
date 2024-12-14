@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Empty, Pagination } from 'antd'
 import axios from 'axios'
@@ -61,39 +62,47 @@ const OrderManagementPage = () => {
                                 <th title="Operation" className="col-action manipulation">Operation</th>
                             </tr>
                         </thead>
+                        {
+                        orderList.length ?
+                            <>
+                                {currentOrders.map((order, index) => (
+                                    <OrderRow
+                                        key={index}
+                                        order_id={order.order_id}
+                                        state_id={order.state_id}
+                                        state_name={order.state_name}
+                                        created_at={order.created_at}
+                                        total_order_value={order.total_order_value}
+                                        refreshOrderTable={refreshOrderTable}
+                                    />
+                                ))}
+                            </>
+                            :
+                            <table className="table w-100 table-hover align-middle table-bordered" style={{ height: "400px" }}>
+                                <tbody>
+                                    <tr><td colSpan={6}><Empty /></td></tr>
+                                </tbody>
+                            </table>
+                        }
                     </table>
                     {
-    orderList.length ?
-        <>
-            {currentOrders.map((order, index) => (
-                <OrderRow
-                    key={index}
-                    order_id={order.order_id}
-                    state_id={order.state_id}
-                    state_name={order.state_name}
-                    created_at={order.created_at}
-                    total_order_value={order.total_order_value}
-                    refreshOrderTable={refreshOrderTable}
-                />
-            ))}
-            <div className="d-flex justify-content-center align-items-center mt-4 mb-4">
-                <Pagination
-                    current={currentPage}
-                    total={orderList.length}
-                    pageSize={ordersPerPage}
-                    onChange={handlePageChange}
-                    showSizeChanger={false}
-                />
-            </div>
-        </>
-        :
-        <table className="table w-100 table-hover align-middle table-bordered" style={{ height: "400px" }}>
-            <tbody>
-                <tr><td colSpan={6}><Empty /></td></tr>
-            </tbody>
-        </table>
-}
-                    </div>
+                        orderList.length ?
+                            <>
+                                <div className="d-flex justify-content-center align-items-center mt-4 mb-4">
+                                    <Pagination
+                                        current={currentPage}
+                                        total={orderList.length}
+                                        pageSize={ordersPerPage}
+                                        onChange={handlePageChange}
+                                        showSizeChanger={false}
+                                    />
+                                </div>
+                            </>
+                            :
+                            ''
+                        }
+                   
+                </div>
             </div>
         </div>
     )

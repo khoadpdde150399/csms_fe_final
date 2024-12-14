@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import Router from 'next/router';
 import useAdminStore from '@/store/adminStore';  // Giả sử bạn đã import đúng store
@@ -8,7 +9,7 @@ const HomePage = () => {
     useEffect(() => {
         // Kiểm tra role_id và điều hướng tương ứng
         if (role_id === 1) {
-            Router.push('/statistical/manage');  // Admin
+            Router.push('/user/manage');  // Admin
         } else if (role_id === 3) {
             Router.push('/chat/manage');  // Staff
         } else {

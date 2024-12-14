@@ -97,7 +97,7 @@ const OrderDetailPage = () => {
 			</div>
 			<div className="footer-order-detail-page">
 				<div className="row">
-					<div className="col-6">
+					<div className="col-12 col-md-6">
 						<div>
 							<p className="fw-bold heading_order_histories">Order history</p>
 						</div>
@@ -115,7 +115,7 @@ const OrderDetailPage = () => {
 							</ul>
 						</div>
 					</div>
-					<div className="col-6">
+					<div className="col-12 col-md-6">
 						<div>
 							<p className="fw-bold heading-detail-page">Customer information</p>
 						</div>

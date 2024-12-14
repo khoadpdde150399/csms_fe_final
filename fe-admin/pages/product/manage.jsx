@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Empty,Pagination } from 'antd';
 import axios from 'axios';
@@ -165,51 +166,59 @@ const ProductManagementPage = () => {
                 Operation
                 </th>
               </tr>
+              
+
+              {sortAndFilterData().length ? (
+                <>
+                  {currentProducts.map((productVariant, index) => (
+                    <ProductAdmin
+                      key={index}
+                      product_id={productVariant.product_id}
+                      product_variant_id={productVariant.product_variant_id}
+                      product_name={productVariant.product_name}
+                      product_image={productVariant.product_image}
+                      colour_name={productVariant.colour_name}
+                      size_name={productVariant.size_name}
+                      price={productVariant.price}
+                      quantity={productVariant.quantity}
+                      state={productVariant.state}
+                      created_at={productVariant.created_at}
+                      refreshProductVariantTable={refreshProductVariantTable}
+                    />
+                  ))}
+                </>
+              ) : (
+                <table
+                  className="table w-100 table-hover align-middle table-bordered"
+                  style={{ height: '400px' }}
+                >
+                  <tbody>
+                    <tr>
+                      <td colSpan={6}>
+                        <Empty />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              )}
+
             </thead>
           </table>
           {sortAndFilterData().length ? (
-            <>
-              {currentProducts.map((productVariant, index) => (
-                <ProductAdmin
-                  key={index}
-                  product_id={productVariant.product_id}
-                  product_variant_id={productVariant.product_variant_id}
-                  product_name={productVariant.product_name}
-                  product_image={productVariant.product_image}
-                  colour_name={productVariant.colour_name}
-                  size_name={productVariant.size_name}
-                  price={productVariant.price}
-                  quantity={productVariant.quantity}
-                  state={productVariant.state}
-                  created_at={productVariant.created_at}
-                  refreshProductVariantTable={refreshProductVariantTable}
-                />
-              ))}
-              <div className="d-flex justify-content-center align-items-center mt-4 mb-4">
-                <Pagination
-                  current={currentPage}
-                  total={sortAndFilterData().length}
-                  pageSize={ordersPerPage}
-                  onChange={handlePageChange}
-                  showSizeChanger={false}
-                  showTotal={(total) => `Total ${total} items`}
-                />
-              </div>
-            </>
-          ) : (
-            <table
-              className="table w-100 table-hover align-middle table-bordered"
-              style={{ height: '400px' }}
-            >
-              <tbody>
-                <tr>
-                  <td colSpan={6}>
-                    <Empty />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          )}
+                <>
+                  <div className="d-flex justify-content-center align-items-center mt-4 mb-4">
+                    <Pagination
+                      current={currentPage}
+                      total={sortAndFilterData().length}
+                      pageSize={ordersPerPage}
+                      onChange={handlePageChange}
+                      showSizeChanger={false}
+                      showTotal={(total) => `Total ${total} items`}
+                    />
+                  </div>
+                </>
+              ) : ( ''
+              )}
         </div>
       </div>
     </div>

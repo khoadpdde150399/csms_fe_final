@@ -1,3 +1,4 @@
+
 import useAdminStore from '@/store/adminStore';
 import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
@@ -37,7 +38,7 @@ const Header = (props) => {
                         style={{ backgroundColor: '#000' }}
                         onClick={handleLogOut}
                     >
-                        Đăng xuất
+                        Log out
                     </Button>
                 </div>
             </div>

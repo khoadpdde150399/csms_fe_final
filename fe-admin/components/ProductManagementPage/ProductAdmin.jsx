@@ -1,13 +1,19 @@
+
 import React, { useState, useRef } from 'react'
 import Link from 'next/link'
 import axios from 'axios'
 import { swalert, swtoast } from "@/mixins/swal.mixin";
-import { FaTrash, FaPencilAlt } from "react-icons/fa"
+import { FaTrash, FaPencilAlt, FaEdit } from "react-icons/fa"
 import { Switch } from 'antd';
 import Swal from "sweetalert2";
+import useAdminStore from '@/store/adminStore';
 
 const ProductAdmin = (props) => {
 
+    const role_id = useAdminStore((state) => state.role_id);
+    const isDisabled = () => {
+        return role_id === 3;
+    }
     const addPointToPrice = (price) => {
         return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     }
@@ -31,33 +37,33 @@ const ProductAdmin = (props) => {
 
     const handleUpdateQuantity = async () => {
         const { value: newQuantity } = await Swal.fire({
-            title: 'Nhập tồn kho mới',
+            title: 'Enter new inventory',
             input: 'number',
             inputLabel: '',
-            inputPlaceholder: 'Tồn kho mới..',
+            inputPlaceholder: 'New inventory..',
             showCloseButton: true,
         })
         if (!newQuantity) {
             swtoast.fire({
-                text: "Tồn kho sản phẩm chưa được cập nhật!"
+                text: "Product inventory has not been updated!"
             })
             return
         }
         if (newQuantity) {
             try {
-                await axios.put('http://localhost:8080/api/product-variant/update-quantity',
+                await axios.put('https://www.backend.csms.io.vn/api/product-variant/update-quantity',
                     {
                         product_variant_ids: [props.product_variant_id],
                         quantity: newQuantity
                     })
                 props.refreshProductVariantTable()
                 swtoast.success({
-                    text: 'Cập nhật tồn kho mới thành công!'
+                    text: 'New inventory update successful!'
                 })
             } catch (e) {
                 console.log(e)
                 swtoast.error({
-                    text: 'Xảy ra lỗi khi cập nhật tồn kho vui lòng thử lại!'
+                    text: 'Error updating inventory please try again!'
                 })
             }
         }
@@ -69,7 +75,7 @@ const ProductAdmin = (props) => {
         if (state) {
             try {
                 setDisabledInputState(true)
-                await axios.put('http://localhost:8080/api/product-variant/on',
+                await axios.put('https://www.backend.csms.io.vn/api/product-variant/on',
                     { product_variant_ids: [props.product_variant_id] })
                 setDisabledInputState(false)
                 props.refreshProductVariantTable()
@@ -77,12 +83,12 @@ const ProductAdmin = (props) => {
                 console.log(e)
                 props.refreshProductVariantTable()
                 setDisabledInputState(false)
-                swtoast.error({ text: 'Xảy ra lỗi khi mở bán vui lòng thử lại!' })
+                swtoast.error({ text: 'Error occurred while opening sale please try again!' })
             }
         } else {
             try {
                 setDisabledInputState(true)
-                await axios.put('http://localhost:8080/api/product-variant/off',
+                await axios.put('https://www.backend.csms.io.vn/api/product-variant/off',
                     { product_variant_ids: [props.product_variant_id] })
                 setDisabledInputState(false)
                 props.refreshProductVariantTable()
@@ -90,7 +96,7 @@ const ProductAdmin = (props) => {
                 console.log(e)
                 props.refreshProductVariantTable()
                 setDisabledInputState(false)
-                swtoast.error({ text: 'Xảy ra lỗi khi tắt sản phẩm vui lòng thử lại!' })
+                swtoast.error({ text: 'An error occurred while shutting down the product, please try again!' })
             }
         }
     };
@@ -98,25 +104,25 @@ const ProductAdmin = (props) => {
     const handleDelete = async () => {
         swalert
             .fire({
-                title: "Xóa biến thể sản phẩm",
+                title: "Delete product variation",
                 icon: "warning",
-                text: "Bạn muốn xóa biến thể sản phẩm này?",
+                text: "You want to delete this product variation?",
                 showCloseButton: true,
                 showCancelButton: true,
             })
             .then(async (result) => {
                 if (result.isConfirmed) {
                     try {
-                        await axios.delete('http://localhost:8080/api/product-variant/delete',
+                        await axios.delete('https://www.backend.csms.io.vn/api/product-variant/delete',
                             { data: { product_variant_ids: [props.product_variant_id] } })
                         props.refreshProductVariantTable()
                         swtoast.success({
-                            text: 'Xóa biến thể sản phẩm thành công!'
+                            text: 'Product variation deleted successfully!'
                         })
                     } catch (err) {
                         console.log(err)
                         swtoast.error({
-                            text: 'Xảy ra lỗi khi xóa biến thể sản phẩm vui lòng thử lại!'
+                            text: 'An error occurred while deleting product variation please try again!'
                         })
                     }
                 }
@@ -124,9 +130,9 @@ const ProductAdmin = (props) => {
     }
 
     return (
-        <div className="table-responsive">
-            <table className="table align-middle product-admin w-100">
-                <tbody className='w-100 text-center'>
+        // <div className="table-responsive">
+        //     <table className="table align-middle product-admin w-100">
+        //         <tbody className='w-100 text-center'>
                     <tr className="w-100">
                         <td className='col-infor-product'>
                             <p className="name">
@@ -142,7 +148,10 @@ const ProductAdmin = (props) => {
                         <td className="text-danger fw-bold col-quantity">
                             <p className='d-flex align-items-center justify-content-center'>
                                 {props.quantity}
-                                <a href="#" onClick={handleUpdateQuantity}>
+                                <a href="#" 
+                                   onClick={isDisabled() ? null : handleUpdateQuantity}
+                                   style={{pointerEvents: isDisabled() ? 'none' : 'auto', 
+                                          opacity: isDisabled() ? 0.5 : 1}}>
                                     <span className="edit-price-button text-premium">
                                         <FaPencilAlt />
                                     </span>
@@ -153,19 +162,33 @@ const ProductAdmin = (props) => {
                             <p>{convertTime(props.created_at)}</p>
                         </td>
                         <td className="text-danger fw-bold col-state">
-                            <Switch checked={props.state} onChange={handleUpdateState} disabled={disabledInputState} />
+                            <Switch 
+                                checked={props.state} 
+                                onChange={handleUpdateState} 
+                                disabled={isDisabled() || disabledInputState} 
+                            />
                         </td>
                         <td className="col-action manipulation">
-                            <Link href={`/product/update/${props.product_id}`}>
-                                Chỉnh sửa
+                            <Link href={`/product/update/${props.product_id}`}
+                                  style={{pointerEvents: isDisabled() ? 'none' : 'auto', 
+                                         opacity: isDisabled() ? 0.5 : 1}}>
+                                <FaEdit />
                             </Link>
                             <br />
-                            <FaTrash style={{ cursor: "pointer" }} title='Xóa' className="text-danger" onClick={() => handleDelete()} />
+                            <FaTrash 
+                                style={{ 
+                                    cursor: isDisabled() ? "not-allowed" : "pointer",
+                                    opacity: isDisabled() ? 0.5 : 1 
+                                }} 
+                                title='Delete' 
+                                className="text-danger" 
+                                onClick={isDisabled() ? null : handleDelete} 
+                            />
                         </td>
                     </tr>
-                </tbody>
-            </table>
-        </div>
+        //         </tbody>
+        //     </table>
+        // </div>
     )
 }
 

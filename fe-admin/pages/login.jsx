@@ -1,5 +1,6 @@
 import { swtoast } from '@/mixins/swal.mixin';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import Router from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 
@@ -32,36 +33,37 @@ const LoginPage = () => {
             swtoast.fire({ text: 'Please enter your email' });
             emailRef.current.focus();
             return;
-        }
-    
+        }    
         if (!password) {
             swtoast.fire({ text: 'Please enter your password' });
             passwordRef.current.focus();
             return;
-        }
-    
+        }    
         try {
             const response = await axios.post(homeAPI + '/admin/login', {
                 email: email,
                 password: password
-            });
-    
-            const { role_id } = response.data;
-    
-            // Lưu thông tin đăng nhập vào store, bao gồm cả role_id
-            setAdminLogin(response.data);
-    
-            setEmail('');
-            setPassword('');
-            swtoast.success({ text: 'Đăng nhập thành công' });
-    
-            // Điều hướng dựa trên role_id
-            if (role_id === 1) {
-                Router.push('/admin/dashboard');  // Admin vào trang quản trị
-            } else if (role_id === 3) {
-                Router.push('/staff/dashboard');  // Staff vào trang dành cho nhân viên
+            });    
+            console.log('response.data ',response.data)
+            Cookies.set('authToken', response.data.token);
+            if (response.data.requires2FA) {
+                Router.push('/2fa-verify');
             } else {
-                Router.push('/');  // Redirect về trang mặc định nếu role_id không khớp
+                console.log('Logged in:', response.data);
+                const { role_id } = response.data;    
+                // Lưu thông tin đăng nhập vào store, bao gồm cả role_id
+                setAdminLogin(response.data);    
+                setEmail('');
+                setPassword('');
+                swtoast.success({ text: 'Login Success' });    
+                // // Điều hướng dựa trên role_id
+                if (role_id === 1) {
+                    Router.push('/user/manage');  // Admin vào trang quản trị
+                } else if (role_id === 3) {
+                    Router.push('/staff/dashboard');  // Staff vào trang dành cho nhân viên
+                } else {
+                    Router.push('/');  // Redirect về trang mặc định nếu role_id không khớp
+                }
             }
         } catch (error) {
             swtoast.error({
@@ -73,7 +75,7 @@ const LoginPage = () => {
     return (
         <div className="login-page position-fixed d-flex justity-content-center align-items-center">
             <div className="login-box">
-                <Heading title="Đăng nhập" />
+                <Heading title="Login" />
                 <form action="" onSubmit={handleLogin}>
                     <div className="w-100">
                         <input

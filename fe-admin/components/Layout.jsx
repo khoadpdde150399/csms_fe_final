@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
 
     return (
         <>
-            {params.pathname === '/login'
+            {params.pathname === '/login' || params.pathname === '/2fa-verify'
                 ? children
                 : isLoggedIn && (
                     <>
@@ -28,10 +28,10 @@ const Layout = ({ children }) => {
                         </Head>
                         <div className="overflow-hidden">
                             <div className="row">
-                                <div className="col-3">
+                                <div className="col-12 col-md-2">
                                     <Section />
                                 </div>
-                                <div className="cont col-9" style={{ paddingRight: '36px' }}>
+                                <div className="cont col-12 col-md-10" >
                                     {children}
                                 </div>
                             </div>

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Swal from "sweetalert2";
@@ -33,15 +34,15 @@ const SizeManage = () => {
 
     const handleCreateSize = async () => {
         const { value: newSize } = await Swal.fire({
-            title: 'Nhập tên size mới',
+            title: 'Enter new size name',
             input: 'text',
             inputLabel: '',
-            inputPlaceholder: 'Tên size mới..',
+            inputPlaceholder: 'New size name..',
             showCloseButton: true,
         })
         if (!newSize) {
             swtoast.fire({
-                text: "Thêm size mới không thành công!"
+                text: "Add new size failed!"
             })
             return
         }
@@ -53,12 +54,12 @@ const SizeManage = () => {
                     })
                 refreshSizetTable()
                 swtoast.success({
-                    text: 'Thêm size mới thành công!'
+                    text: 'New size added successfully!'
                 })
             } catch (e) {
                 console.log(e)
                 swtoast.error({
-                    text: 'Xảy ra lỗi khi thêm size mới vui lòng thử lại!'
+                    text: 'Error adding new size please try again!'
                 })
             }
         }
@@ -66,17 +67,17 @@ const SizeManage = () => {
 
     return (
         <div className="catalog-management-item">
-            <Heading title="Tất cả size" />
+            <Heading title="All sizes" />
             <div className='create-btn-container'>
-                <button className='btn btn-dark btn-sm' onClick={handleCreateSize}>Tạo size</button>
+                <button className='btn btn-dark btn-sm' onClick={handleCreateSize}>Create size</button>
             </div>
             <div className='table-container' style={{ height: "220px" }}>
                 <table className='table table-hover table-bordered'>
                     <thead>
                         <tr>
-                            <th className='text-center'>STT</th>
+                            <th className='text-center'>NO.</th>
                             <th>
-                                Tên size
+                            Size name
                             </th>
                         </tr>
                     </thead>
