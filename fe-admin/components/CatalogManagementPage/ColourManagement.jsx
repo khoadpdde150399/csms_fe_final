@@ -6,12 +6,6 @@ import Heading from '../Heading'
 import { swtoast } from '@/mixins/swal.mixin'
 import { homeAPI } from '@/config'
 
-// const fakeColourList = [
-//     { colour_id: 1, colour_name: "Trắng" },
-//     { colour_id: 1, colour_name: "Đen" },
-//     { colour_id: 1, colour_name: "Xanh" },
-// ]
-
 const ColourManage = () => {
     const [colourList, setColourList] = useState([])
 
@@ -39,15 +33,15 @@ const ColourManage = () => {
 
     const handleCreateColour = async () => {
         const { value: newColour } = await Swal.fire({
-            title: 'Nhập tên màu mới',
+            title: 'Enter new color name',
             input: 'text',
             inputLabel: '',
-            inputPlaceholder: 'Tên màu mới..',
+            inputPlaceholder: 'New color name..',
             showCloseButton: true,
         })
         if (!newColour) {
             swtoast.fire({
-                text: "Thêm màu mới không thành công!"
+                text: "Adding new color failed!"
             })
             return
         }
@@ -59,12 +53,12 @@ const ColourManage = () => {
                     })
                 refreshColourTable()
                 swtoast.success({
-                    text: 'Thêm màu mới thành công!'
+                    text: 'New color added successfully!'
                 })
             } catch (e) {
                 console.log(e)
                 swtoast.error({
-                    text: 'Xảy ra lỗi khi thêm màu mới vui lòng thử lại!'
+                    text: 'Error adding new color please try again!'
                 })
             }
         }
@@ -72,17 +66,17 @@ const ColourManage = () => {
 
     return (
         <div className="catalog-management-item">
-            <Heading title="Tất cả màu" />
+            <Heading title="All colors" />
             <div className='create-btn-container'>
-                <button className='btn btn-dark btn-sm' onClick={handleCreateColour}>Tạo màu</button>
+                <button className='btn btn-dark btn-sm' onClick={handleCreateColour}>Create Color</button>
             </div>
             <div className='table-container' style={{ height: "220px" }}>
                 <table className='table table-hover table-bordered'>
                     <thead>
                         <tr>
-                            <th className='text-center'>STT</th>
+                            <th className='text-center'>No.</th>
                             <th>
-                                Tên màu
+                                Color Name
                             </th>
                         </tr>
                     </thead>

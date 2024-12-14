@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Router from 'next/router';
@@ -13,7 +14,7 @@ import { homeAPI } from '@/config'
 const UpdateUserPage = () => {
     const { id } = Router.query
 
-    const [customername, setcCustomerName] = useState('');
+    const [customername, setCustomerName] = useState('');
     const [customerinfoid, setCustomerInfoid] = useState('');
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
@@ -28,7 +29,7 @@ const UpdateUserPage = () => {
                 const result = await axios.get(`${homeAPI}/user/admin/detail/${id}`)
                 setCustomerInfoid(result.data.customer_info_id)
                 setPhone(result.data.phone_number)
-                setcCustomerName(result.data.customer_name)
+                setCustomerName(result.data.customer_name)
                 setAddress(result.data.address)
                 setPoint(result.data.point)
                 setIsLoading(false)
@@ -48,7 +49,7 @@ const UpdateUserPage = () => {
             try {
                 const result = await axios.get(`${homeAPI}/user/admin/detail/${id}`)
                 setPhone(result.data.phone_number)
-                setcCustomerName(result.data.customer_name)
+                setCustomerName(result.data.customer_name)
                 setAddress(result.data.address)
                 setPoint(result.data.point)
             } catch (err) {
@@ -102,14 +103,14 @@ const UpdateUserPage = () => {
                         <Input
                             id='product-code' placeholder='Customer Name'
                             value={customername}
-                            onChange={(e) => setcCustomerName(e.target.value)}
+                            onChange={(e) => setCustomerName(e.target.value)}
                         />
                     </div>
                     <div className="col-6">
                         <label htmlFor='product-money' className="fw-bold">Phone:</label>
                         <InputNumber
                             id='product-money' placeholder='Phone'
-                            value={phone === 0 ? null : phone}
+                            value={phone}
                             style={{ width: '100%' }}
                             onChange={setPhone}
                         />
@@ -118,18 +119,17 @@ const UpdateUserPage = () => {
                 <div className="row">
                     <div className="col-6">
                         <label htmlFor='product-address' className="fw-bold">Address:</label>
-                        <InputNumber
+                        <Input
                             id='product-address' placeholder='Address'
-                            value={address === 0 ? null : address}
-                            style={{ width: '100%' }}
-                            onChange={setAddress}
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
                         />
                     </div>
                     <div className="col-6">
                         <label htmlFor='product-address' className="fw-bold">Loyalty Point</label>
                         <InputNumber
                             id='product-point' placeholder='Input Points'
-                            value={point === 0 ? null : point}
+                            value={point}
                             style={{ width: '100%' }}
                             onChange={setPoint}
                         />

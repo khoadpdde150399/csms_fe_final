@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Empty } from 'antd'
 import { Pie, Line } from '@ant-design/plots';
@@ -143,19 +144,19 @@ const StatisticalManagementPage = () => {
             <Header title="Statistical" />
             <div className="wrapper manager-box">
                 <div className="row">
-                    <div className="col-6" style={{ height: '200px' }}>
+                    <div className="col-12 col-md-6 chart1">
                         <Heading title="All Products" />
                         <Pie {...chartTotalProduct()} />
                     </div>
-                    <div className="col-6" style={{ height: '200px' }}>
+                    <div className="col-12 col-md-6 chart2" >
                         <Heading title="All Customer" />
                         <Pie {...chartTotalUser()} />
                     </div>
-                    <div className="col-6 pt-5"  style={{ height: '300px' }}>
+                    <div className="col-12 col-md-6 pt-5 chart3"  >
                         <Heading title="Order by date" />
                         <Line {...chartTotalPrice()} />
                     </div>
-                    <div className="col-6 pt-5"  style={{ height: '300px' }}>
+                    <div className="col-12 col-md-6 pt-5 chart4" >
                         <Heading title="Daily Profit" />
                         <Line {...chartTotalRevenuePerDay()} />
                     </div>
