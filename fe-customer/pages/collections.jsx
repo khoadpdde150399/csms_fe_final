@@ -101,12 +101,6 @@ const CollectionPage = () => {
                         grid-template-columns: repeat(2, 1fr);
                     }
                 }
-
-                @media (max-width: 480px) {
-                    .product-list {
-                        grid-template-columns: 1fr;
-                    }
-                }
             `}</style>
             <style jsx global>{`
                 .ant-pagination-item {

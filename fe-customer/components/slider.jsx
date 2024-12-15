@@ -3,15 +3,15 @@ import Image from 'next/image';
 
 const slideList = [
     {
-        src: '/img/homepage/slide_01.jpg',
+        src: '/img/banner/banner1.jpg',
         alt: 'slide_01'
     },
     {
-        src: '/img/homepage/slide_02.jpg',
+        src: '/img/banner/banner2.jpg',
         alt: 'slide02'
     },
     {
-        src: '/img/homepage/slide_03.jpg',
+        src: '/img/banner/banner3.jpg',
         alt: 'slide03'
     }
 ];

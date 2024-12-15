@@ -20,3 +20,12 @@
         }
     }
 }
+@media screen and (max-width: 768px){
+    .catalog-management-page{
+        padding: 0 10px;
+        .header{
+            flex-direction: column;
+            height: auto;
+        }
+    } 
+}

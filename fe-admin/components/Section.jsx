@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { menu } from '../data/data';  // Giả sử bạn đã khai báo menu trong file data.js
 import router from 'next/router';

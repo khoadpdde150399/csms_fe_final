@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const CarouselFade = ({ imageList }) => {
     return (
-        <Carousel>
+        <Carousel draggable >
             {imageList &&
                 imageList.map((image, index) => {
                     return (

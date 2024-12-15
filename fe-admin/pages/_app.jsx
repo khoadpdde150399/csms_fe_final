@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import Head from 'next/head';
+import 'antd/dist/reset.css';
 
 import '../styles/globals.scss';
 import Layout from '@/components/Layout';

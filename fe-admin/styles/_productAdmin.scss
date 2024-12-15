@@ -1,6 +1,6 @@
 .product-admin {
     margin-bottom: 0 !important;
-    table-layout: fixed;
+    // table-layout: fixed;
 
     tr {
         border: 1px solid #ccc;
@@ -37,6 +37,12 @@
             border: 1px solid #ccc;
             height: 50px;
         }
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    tr:hover{
+        background-color: #ccc;
     }
 
     p {

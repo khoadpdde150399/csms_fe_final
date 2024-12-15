@@ -170,8 +170,8 @@ const CartPage = () => {
     }, [clearCart, productList, shippingcost, deliveryCharges])
     return (
         <div className="cart-page container pb-4">
-            <div className="row">
-                <div className="col-7 cart-left-section">
+            <div className="row cart-page-child">
+                <div className="col-12 col-lg-7 cart-left-section">
                     {
                         customerInfor &&
                         <CustomerInforForm
@@ -186,7 +186,7 @@ const CartPage = () => {
                         />
                     }
                 </div>
-                <div className="col-5 cart-right-section">
+                <div className="col-12 col-lg-5 cart-right-section">
                     <div className="title">Shopping Cart</div>
                     <div className="cart-section">
                         {productList.length > 0 ? (

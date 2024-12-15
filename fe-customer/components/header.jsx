@@ -1,4 +1,3 @@
-
 import { swalert, swtoast } from '@/mixins/swal.mixin';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';

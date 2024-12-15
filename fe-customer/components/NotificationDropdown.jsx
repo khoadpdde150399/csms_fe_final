@@ -96,7 +96,7 @@ const NotificationDropdown = () => {
     );
 
     return (
-        <li style={{marginLeft:'-15px'}} className="cart inner-item menu-item fw-bold text-uppercase">
+        <li className="cart inner-item menu-item fw-bold text-uppercase">
             <Dropdown 
                 overlay={<NotificationListContent />}
                 placement="bottomRight"
@@ -111,7 +111,6 @@ const NotificationDropdown = () => {
                     alignItems: 'center',
                     cursor: 'pointer',
                     height: '100%',
-                    padding: '0 8px'
                 }}>
                     <Badge 
                         count={notificationList.length}

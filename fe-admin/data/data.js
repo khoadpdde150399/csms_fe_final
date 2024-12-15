@@ -54,6 +54,13 @@ export const menu = [
         list: [
 
         ],
+    },
+    {
+        title: 'Predict Management',
+        href: '/predict/manage',
+        list: [
+
+        ],
     }
 
 ]

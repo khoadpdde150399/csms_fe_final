@@ -13,3 +13,45 @@
 @import "./orderRow";
 @import "./category";
 @import "./loading";
+
+:where(.css-dev-only-do-not-override-1x0dypw).ant-btn-color-dangerous.ant-btn-background-ghost{
+    color: unset;
+    background: unset;
+    border-color: unset;
+}
+:where(.css-dev-only-do-not-override-1x0dypw).ant-btn-color-dangerous.ant-btn-variant-outlined, :where(.css-dev-only-do-not-override-1x0dypw).ant-btn-color-dangerous.ant-btn-variant-dashed{
+    border-color: unset;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// Thêm styles cho Ant Design Pagination
+.ant-pagination {
+  .ant-pagination-item-active {
+    border-color: #2563eb;
+    a {
+      color: #2563eb;
+    }
+    &:hover {
+      border-color: #3b82f6;
+      a {
+        color: #3b82f6;
+      }
+    }
+  }
+
+  .ant-pagination-item, 
+  .ant-pagination-prev, 
+  .ant-pagination-next,
+  .ant-pagination-jump-prev,
+  .ant-pagination-jump-next {
+    &:hover {
+      border-color: #3b82f6;
+      a {
+        color: #3b82f6;
+      }
+    }
+  }
+}

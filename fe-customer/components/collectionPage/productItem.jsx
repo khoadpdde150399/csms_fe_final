@@ -1,4 +1,3 @@
-
 /* eslint-disable react-hooks/rules-of-hooks */
 import { StarFilled, HeartOutlined, HeartFilled, ShareAltOutlined } from '@ant-design/icons';
 import Image from 'next/image';
@@ -28,16 +27,16 @@ const styles = {
     productThumbnails: {
         position: 'relative',
         width: '100%',
-        paddingTop: '100%', // Keep the aspect ratio square
+        paddingTop: '100%', // Giữ tỷ lệ khung hình vuông
         overflow: 'hidden',
-        margin: '0 auto', // Center the thumbnail
+        margin: '0 auto', // Căn giữa thumbnail
     },
     thumbnailContainer: {
         width: '100%',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        position: 'relative', // Buy Now button in the image
+        position: 'relative', // Quan trọng để căn chỉnh nút Mua Ngay trong ảnh
     },
     image: {
         objectFit: 'cover',
@@ -233,17 +232,17 @@ const ProductItem = (props) => {
     };
 
     const handleBuyNow = (event) => {
-        event.preventDefault(); // Prevent default button behavior
-        //Send product_id and color_id to Modal
+        event.preventDefault(); // Ngăn hành vi mặc định của nút
+        // Gửi product_id và colour_id vào Modal
         setModalData({
             product_id: props.product_id,
             colour_id: props.colour_id,
         });
-        setIsProductDetailModalVisible(true); // Open modal
+        setIsProductDetailModalVisible(true); // Mở modal
     };
     const closeProductDetailModal = () => {
-        setIsProductDetailModalVisible(false); // Close the modal
-        setModalData({ product_id: null, colour_id: null }); // Reset modal data
+        setIsProductDetailModalVisible(false); // Đóng modal
+        setModalData({ product_id: null, colour_id: null }); // Reset dữ liệu modal
 };
     return (
         <div style={styles.productItem}>
@@ -321,10 +320,10 @@ const ProductItem = (props) => {
                 <p style={styles.price}>{props.price}đ</p>
             </div>
 
-            {/* Buy Now" button" */}
+            {/* Nút "Mua Ngay" */}
 
 
-            {/* Shared Modal */}
+            {/* Modal chia sẻ */}
             <Modal
                 title="Share this product"
                 open={isShareModalVisible}
@@ -362,7 +361,7 @@ const ProductItem = (props) => {
                             onCancel={closeProductDetailModal}
                             footer={null}
                             width={1200}
-                            height={900} // Adjust the width of the Modal
+                            height={900} // Điều chỉnh độ rộng của Modal
                             bodyStyle={{ padding: '20px' }}
                             >
                             <ProductDetailModal

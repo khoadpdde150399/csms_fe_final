@@ -4,10 +4,14 @@
     box-sizing: border-box;
 }
   
-html {
-    font-family: Arial, Helvetica, sans-serif;
+html, body {
+    font-family: Montserrat,sans-serif!important;
 }
   
+table > :not(caption) > * > *{
+    background-color: unset !important;
+    color: unset !important;
+}
 :root {
     --height-header: 68px;
     --height-sub-header: 56px;
@@ -16,4 +20,22 @@ html {
     --white: white;
     --black: #000;
     --height-input-on-search: 40px;
+}
+.manager-box {
+    .chart1, .chart2{
+        height: 200px;
+    }
+    .chart3, .chart4{
+        height: 300px;
+    }
+}
+@media screen and (max-width: 768px){
+    .manager-box, .update-product-page, .create-product-form, .order-detail-page{
+        padding: 0 10px;
+    }
+    .manager-box {
+        .chart1, .chart2, .chart3, .chart4{
+            height: auto;
+        }
+    }
 }

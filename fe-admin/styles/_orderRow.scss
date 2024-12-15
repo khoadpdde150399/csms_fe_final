@@ -1,7 +1,5 @@
     .order-manage-table {
         margin-bottom: 0 !important;
-        table-layout: fixed;
-
         tr {
             border: 1px solid #ccc;
 
@@ -15,6 +13,9 @@
 
             .col-state {
                 width: 15%;
+                p{
+                    font-size: 15px;
+                }
             }
 
             .col-create-at {
@@ -23,10 +24,16 @@
 
             .col-total-value {
                 width: 15%;
+                text-align: right;
             }
 
             .col-action {
                 width: 20%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto;
+                border: none;
             }
 
             td {
@@ -37,5 +44,11 @@
                 border: 1px solid #ccc;
                 height: 50px;
             }
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover{
+            background-color: #ccc;
         }
     }

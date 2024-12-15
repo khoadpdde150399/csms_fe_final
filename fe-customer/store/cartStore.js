@@ -16,7 +16,7 @@ const handleAddToCart = (get, set, product) => {
         if (product.quantity <= 0 || product.quantity > product.inventory)
             return set({
                 isError: true,
-                messageError: product.name + ' Only left in stock ' + product.inventory + ' product'
+                messageError: product.name + ' only stock left ' + product.inventory + ' products'
             });
         product.totalValue = product.price * product.quantity;
         newProductList.push(product);
@@ -25,7 +25,7 @@ const handleAddToCart = (get, set, product) => {
         if (newQuantity > newProductList[position].inventory)
             return set({
                 isError: true,
-                messageError: product.name + ' Only left in stock ' + product.inventory + ' product'
+                messageError: product.name + ' only stock left' + product.inventory + ' products'
             });
         newProductList[position].quantity = newQuantity;
         newProductList[position].totalValue =

@@ -1,4 +1,3 @@
-
 import { CloseOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import Image from 'next/image';
 import { memo } from 'react';

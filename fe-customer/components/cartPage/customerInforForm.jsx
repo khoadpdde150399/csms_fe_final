@@ -1,4 +1,3 @@
-
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Radio } from 'antd';
 import { memo, useState, useEffect } from 'react';
@@ -45,15 +44,15 @@ const CustomerInforForm = ({ email = '', customerName = '', phoneNumber = '', ad
         resolver: yupResolver(schema),
     });
 
-    // State to track payment methods
-    const [paymentMethod, setPaymentMethod] = useState('cod'); // 'cod'
+    // State để theo dõi hình thức thanh toán
+    const [paymentMethod, setPaymentMethod] = useState('cod'); // Mặc định là 'cod'
 
     const handlePaymentChange = (e) => {
         setPaymentMethod(e.target.value);
         setValue('payment_method', e.target.value);
     };
 
-    // Set new SDK for payment
+    // Set sdk mới thanh toán dc
     const [sdkReady, setSdkReady] = useState(false)
     useEffect(() => {
         const script = document.createElement("script");
@@ -64,7 +63,7 @@ const CustomerInforForm = ({ email = '', customerName = '', phoneNumber = '', ad
         }
         document.body.appendChild(script);
     }, []);
-    // Successful Paypal Payment tracking information
+    // Thông tin theo dõi Thanh Toán Paypal thành công
     const onSuccessPaypal = (details, data) => {
         const formData = getValues();
         handleSubmit(handlePlaceOrderPaypal(formData, details, data));

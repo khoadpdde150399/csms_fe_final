@@ -1,4 +1,3 @@
-
 export const sidebar = [
     {
         text: 'Personal information',
