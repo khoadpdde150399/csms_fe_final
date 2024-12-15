@@ -42,11 +42,3 @@ export const menu = [
         ],
     },
     {
-        title: 'Message Management',
-        href: '/chat/manage',
-        list: [
-
-        ],
-    }
-
-]

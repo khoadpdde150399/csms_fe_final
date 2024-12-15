@@ -1,8 +1,9 @@
+
 import React, { useState } from 'react'
 import Link from 'next/link'
 import axios from 'axios'
 import { swalert, swtoast } from "@/mixins/swal.mixin";
-import { FaTrash } from "react-icons/fa"
+import { FaTrash, FaEdit } from "react-icons/fa"
 
 const UserAdmin = (props) => {
     const addPointToPrice = (price) => {
@@ -57,7 +58,7 @@ const UserAdmin = (props) => {
             </td>
             <td className="col-action manipulation">
                 <Link href={`/user/update/${props.customer_info_id}`}>
-                    Edit
+                     <FaEdit />
                 </Link>
                 <br />
                 <FaTrash 

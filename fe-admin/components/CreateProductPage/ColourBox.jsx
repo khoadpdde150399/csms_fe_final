@@ -1,11 +1,8 @@
+
 import React, { useState, useEffect } from 'react'
 import { Select } from 'antd';
 import axios from 'axios';
 
-// let fakeColourList = [
-//     { colour_id: 1, colour_name: 'Trắng' }, { colour_id: 2, colour_name: 'Đen' }, { colour_id: 3, colour_name: 'Xám' },
-//     { colour_id: 4, colour_name: 'Xanh' }, { colour_id: 5, colour_name: 'Đỏ' },
-// ];
 
 const ColourBox = ({ selectedColours, setSelectedColours, colourBoxValue, setColourBoxValue }) => {
 
@@ -15,7 +12,7 @@ const ColourBox = ({ selectedColours, setSelectedColours, colourBoxValue, setCol
     useEffect(() => {
         const getColourList = async () => {
             try {
-                const result = await axios.get('http://localhost:8080/api/colour/list');
+                const result = await axios.get('https://www.backend.csms.io.vn/api/colour/list');
                 setColourList(result.data);
             } catch (err) {
                 console.log(err);
@@ -52,14 +49,14 @@ const ColourBox = ({ selectedColours, setSelectedColours, colourBoxValue, setCol
 
     return (
         <div>
-            <label htmlFor="enter-color" className="fw-bold">Màu:</label>
+            <label htmlFor="enter-color" className="fw-bold">Color:</label>
             <Select
                 id='enter-color'
                 mode="multiple"
                 value={colourBoxValue}
                 style={{ width: '100%' }}
                 placement='bottomLeft'
-                placeholder="Chọn màu"
+                placeholder="Pick Color"
                 onSelect={handleOnSelect}
                 onDeselect={handleOnDeselect}
                 options={options}
