@@ -12,21 +12,21 @@ const CustomerInforForm = ({ email = '', customerName = '', phoneNumber = '', ad
     const schema = object({
         customerName: string()
             .trim()
-            .required('Vui lòng nhập Họ và tên của bạn')
-            .max(255, 'Họ và tên không được vượt quá 255 ký tự'),
+            .required('Please enter your Full Name')
+            .max(255, 'Full name cannot exceed 255 characters'),
         phoneNumber: string()
             .trim()
-            .required('Vui lòng nhập Số điện thoại của bạn')
-            .matches(/^\d{10}$/, 'Số điện thoại không hợp lệ'),
+            .required('Please enter your Phone Number')
+            .matches(/^\d{10}$/, 'Invalid phone number'),
         email: string()
             .trim()
-            .required('Vui lòng nhập Email của bạn')
-            .max(255, "Email không được vượt quá 255 ký tự")
-            .email('Email không hợp lệ'),
+            .required('Please enter your Email')
+            .max(255, "Email must not exceed 255 characters")
+            .email('Invalid email'),
         address: string()
             .trim()
-            .required('Vui lòng nhập Địa chỉ của bạn')
-            .max(255, 'Địa chỉ không được vượt quá 255 ký tự'),
+            .required('Please enter your Address')
+            .max(255, 'Address cannot exceed 255 characters'),
         payment_method: string(),
         description: string(),
         amount: Number()
@@ -70,21 +70,21 @@ const CustomerInforForm = ({ email = '', customerName = '', phoneNumber = '', ad
     }
     return (
         <form onSubmit={handleSubmit(handlePlaceOrder)}>
-            <div className="title">Thông tin vận chuyển</div>
+           <div className="title">Shipping information</div>
             <div>
-                <div className="row">
-                    <div className="col-6">
-                        <div className="mb-3"><InputField name='customerName' control={control} placeholder={'Họ và tên của bạn'} /></div>
-                    </div>
-                    <div className="col-6">
-                        <div className="mb-3"><InputField name='phoneNumber' control={control} placeholder={'Số điện thoại'} /></div>
-                    </div>
-                </div>
-                <div className="mb-3"><InputField name='email' control={control} placeholder={'Địa chỉ email'} /></div>
-                <div className="mb-3"><InputField name='address' control={control} placeholder={'Địa chỉ (Ví dụ: 112/12 3/2 Hưng Lợi, Ninh Kiều)'} /></div>
+            <div className="row">
+<div className="col-6">
+<div className="mb-3"><InputField name='customerName' control={control} placeholder={'Your first and last name'} /></div>
+</div>
+<div className="col-6">
+<div className="mb-3"><InputField name='phoneNumber' control={control} placeholder={'Phone number'} /></div>
+</div>
+</div>
+<div className="mb-3"><InputField name='email' control={control} placeholder={'Email address'} /></div>
+<div className="mb-3"><InputField name='address' control={control} placeholder={'Address (Example: 112/12 3/2 Hung Loi, Ninh Kieu)'} /></div>
             </div>
             <div className="payment">
-                <div className="title">Hình thức thanh toán</div>
+            <div className="title">Payment Methods</div>
                 <div>
                     <label
                         htmlFor="cod"
@@ -102,8 +102,8 @@ const CustomerInforForm = ({ email = '', customerName = '', phoneNumber = '', ad
                             <FaShippingFast />
                         </div>
                         <div className="payment-item-name">
-                            <p className="text-uppercase">cod</p>
-                            <p className="">Thanh toán khi nhận hàng</p>
+                        <p className="text-uppercase">cod</p>
+                        <p className="">Cash on delivery</p>
                         </div>
                     </label>
                 </div>
@@ -124,8 +124,8 @@ const CustomerInforForm = ({ email = '', customerName = '', phoneNumber = '', ad
                             <FaPaypal />
                         </div>
                         <div className="payment-item-name">
-                            <p className="text-uppercase">paypal</p>
-                            <p className="">Thanh toán qua PayPal</p>
+                        <p className="text-uppercase">paypal</p>
+                        <p className="">Pay via PayPal</p>
                         </div>
                     </label>
                 </div>
@@ -141,7 +141,7 @@ const CustomerInforForm = ({ email = '', customerName = '', phoneNumber = '', ad
                 />
             ) : (
                 <Button htmlType='submit' loading={isSubmitting}>
-                    {!isSubmitting && 'Đặt Hàng'}
+                    {!isSubmitting && 'Order Now'}
                 </Button>
             )}                
             </div>

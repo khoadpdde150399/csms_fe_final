@@ -13,7 +13,7 @@ const CartItem = (props) => {
     return (
         <div className="cart-item">
             <div className="row">
-                <div className="cart-col-left col-3">
+                <div className="cart-col-left col-4">
                     <div className="box-img position-relative border-radius">
                         <Image
                             className="border-radius"
@@ -25,7 +25,7 @@ const CartItem = (props) => {
                         <div className="position-absolute product-quantity">{quantity}</div>
                     </div>
                 </div>
-                <div className="cart-col-right col-9 d-flex flex-column justify-content-between">
+                <div className="cart-col-right col-8 d-flex flex-column justify-content-between">
                     <div className="cart-item-info position-relative">
                         <div className="product-name">
                             <p className="fw-bold">{name}</p>

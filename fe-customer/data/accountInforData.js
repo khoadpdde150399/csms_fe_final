@@ -1,14 +1,14 @@
 export const sidebar = [
     {
-        text: 'Thông tin cá nhân',
+        text: 'Personal information',
         href: '/account/infor',
     },
     {
-        text: 'Danh sách đơn hàng',
+        text: 'Order List',
         href: '/account/orders',
     },
     {
-        text: 'Thông báo',
+        text: 'Notification',
         href: '/account/notification',
     }
 ];

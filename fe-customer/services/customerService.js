@@ -27,6 +27,18 @@ const customerService = {
         return await axiosJWT.put('/customer/update', data);
     },
 
+    ForgotPass: async (data) => {
+        return await axiosClient.post('/customer/forgotpass', data);
+    },
+
+    verifyOtp: async (data) => {
+        return await axiosClient.post('/customer/verifyOtp', data);
+    },
+
+    changePassword: async (data) => {
+        return await axiosClient.post('/customer/resetPassword', data);
+    },
+
 };
 
 export default customerService;

@@ -25,7 +25,7 @@ const UpdateFeedbackModal = (props) => {
                 content
             };
             await feedbackService.update(feedback);
-            swtoast.success({ text: 'Sửa đánh giá thành công' });
+            swtoast.success({ text: 'Update Feedback Success' });
             setProductVariantId(null);
             setIsOpen(false);
             refreshOrderList();
@@ -33,7 +33,7 @@ const UpdateFeedbackModal = (props) => {
             console.log(err);
             setProductVariantId(null);
             setIsOpen(false);
-            swtoast.error({ text: 'Có lỗi khi sửa đánh giá vui lòng thử lại!' });
+            swtoast.error({ text: 'Error editing review please try again!' });
         }
     };
 
@@ -48,7 +48,7 @@ const UpdateFeedbackModal = (props) => {
                 console.log(err);
                 setProductVariantId(null);
                 setIsOpen(false);
-                swtoast.error({ text: 'Có lỗi khi tải đánh giá vui lòng thử lại!' });
+                swtoast.error({ text: 'Error loading review please try again!' });
             }
         };
         getFeedback();
@@ -67,19 +67,19 @@ const UpdateFeedbackModal = (props) => {
             </div>
             <div className="modal-body">
                 <div className="d-flex align-items-center">
-                    <label>Đánh giá: </label>
+                    <label>Rating: </label>
                     <div className="rating-box">
                         <Rate value={rate} onChange={(value) => setRate(value)} />
                     </div>
                 </div>
                 <div className="">
-                    <label htmlFor="content">Bình luận: </label>
+                    <label htmlFor="content">Comment: </label>
                     <div className="content-box">
                         <TextArea
                             value={content}
                             id="content"
                             onChange={(e) => setContent(e.target.value)}
-                            placeholder="Bình luận"
+                            placeholder="Comment"
                             autoSize={{
                                 minRows: 3,
                                 maxRows: 5
@@ -93,7 +93,7 @@ const UpdateFeedbackModal = (props) => {
                     className="rate-btn border-radius bg-dark text-light text-center"
                     onClick={handleUpdateFeedback}
                 >
-                    Sửa đánh giá
+                    Update Feedback
                 </div>
             </div>
         </Modal>

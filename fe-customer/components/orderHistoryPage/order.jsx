@@ -52,7 +52,7 @@ const Order = (props) => {
             </div>
             <div className="order-footer d-flex align-items-center justify-content-end">
                 <div>
-                    Tổng đơn hàng: <strong>{formatPrice(totalOrderValue)}đ</strong>
+                    Total Orders: <strong>{formatPrice(totalOrderValue)}đ</strong>
                 </div>
             </div>
         </Link>

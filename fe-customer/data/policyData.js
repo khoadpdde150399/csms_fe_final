@@ -10,26 +10,26 @@ import {
 export const policyList = [
     {
         icon: <FaShippingFast />,
-        des: 'Miễn phí vận chuyển cho đơn hàng trên 200k'
+        des: 'Free shipping for orders over 200k'
     },
     {
         icon: <FaHistory />,
-        des: '60 ngày đổi trả vì bất kỳ lý do gì'
+        des: '60 days return for any reason'
     },
     {
         icon: <FaPhoneVolume />,
-        des: 'Hotline 1900.27.27.37 hỗ trợ từ 8h30 - 22h mỗi ngày'
+        des: 'Hotline 1900.27.27.37 supports from 8:30 am - 10:00 pm every day'
     },
     {
         icon: <FaUserCheck />,
-        des: 'Đổi trả cực dễ chỉ cần số điện thoại'
+        des: 'Extremely easy return and exchange with just a phone number'
     },
     {
         icon: <FaSyncAlt />,
-        des: 'Đến tận nơi nhận hàng trả, hoàn tiền trong 24h'
+        des: 'Come to receive the goods and return them, refund within 24 hours'
     },
     {
         icon: <FaPlaneDeparture />,
-        des: 'Giao hàng nhanh chóng toàn quốc'
+        des: 'Fast delivery nationwide'
     }
 ];

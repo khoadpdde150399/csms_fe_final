@@ -36,7 +36,7 @@ const OrderItem = (props) => {
             if (hasFeedback)
                 return (
                     <div onClick={showUpdateFeedbackModal} className="feedback-btn border-radius">
-                        <span>Sửa đánh giá</span>
+                        <span>Update Feedbacks</span>
                     </div>
                 );
             else

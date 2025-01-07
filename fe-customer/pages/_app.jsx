@@ -21,6 +21,11 @@ const App = ({ Component, pageProps }) => {
     const AuthComponent = Component.isAuth ? Auth : React.Fragment;
 
     return (
+        <>
+            <Head>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <meta name="format-detection" content="telephone=no, date=no, email=no, address=no" />
+            </Head>
         <QueryClientProvider client={queryClient}>
             
             <SessionProvider session={pageProps.session}>
@@ -38,6 +43,7 @@ const App = ({ Component, pageProps }) => {
                 )} */}
             </SessionProvider>
         </QueryClientProvider>
+        </>
     );
 };
 
