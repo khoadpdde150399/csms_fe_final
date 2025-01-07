@@ -17,6 +17,36 @@ import queries from '@/queries/index.js';
 import useCartStore from '@/store/cartStore.js';
 import { formatPrice, formatRate } from '../../helpers/format.js';
 
+const styles = {
+    actionBox: {
+        margin: '20px 0',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '15px'
+    },
+    quantitySection: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '20px'
+    },
+    inventoryStatus: {
+        color: '#dc3545', // màu đỏ của bootstrap
+        // hoặc có thể dùng '#ff0000' hoặc 'red'
+        fontSize: '14px',
+        fontWeight: '500' // có thể thêm để làm nổi bật hơn
+    },
+    addToCartButton: {
+        background: '#000',
+        color: 'white',
+        padding: '12px 20px',
+        cursor: 'pointer',
+        width: '100%',
+        textAlign: 'center',
+        borderRadius: '4px',
+        transition: 'all 0.3s ease'
+    }
+};
+
 const ProductDetailPage = () => {
     const router = useRouter();
     const { product_id, colour } = router.query;
@@ -124,7 +154,7 @@ const ProductDetailPage = () => {
                     <div className="price-box">{price && <span>{formatPrice(price)}đ</span>}</div>
                     <div className="colour-option-box">
                         <span>
-                        Color:
+                            Color:
                             <strong>
                                 &nbsp;
                                 {colourList && selectedColourIndex != null
@@ -155,7 +185,7 @@ const ProductDetailPage = () => {
                                 sizeList.map((size, index) => {
                                     return (
                                         <OptionButton
-                                            key={index}
+                                           key={index}
                                             isSelected={selectedSizeIndex === index}
                                             content={size.size_name}
                                             getContent={() => setSelectedSizeIndex(index)}
@@ -164,15 +194,26 @@ const ProductDetailPage = () => {
                                 })}
                         </div>
                     </div>
-                    <div className="action-box row">
-                        <ProductQuantityInput quantity={quantity} setQuantity={setQuantity} />
+                    
+                    <div style={styles.actionBox}>
+                        <div style={styles.quantitySection}>
+                            <ProductQuantityInput 
+                                quantity={quantity} 
+                                setQuantity={setQuantity}
+                                max={inventory || 0}
+                            />
+                            <div style={styles.inventoryStatus}>
+                                <span>{inventory || 0} products available</span>
+                            </div>
+                        </div>
                         <div
-                            className="add-product-to-cart-button border-radius col-7 d-flex justify-content-around align-items-center"
+                            style={styles.addToCartButton}
                             onClick={handleAddToCart}
                         >
                             Add to cart
                         </div>
                     </div>
+
                     <div className="policy-box d-flex flex-wrap justify-content-around position-relative">
                         {policyList &&
                             policyList.map((item, index) => {
@@ -184,7 +225,7 @@ const ProductDetailPage = () => {
 
             <div className="row product-detail">
                 <div className="col-12">
-                    <h5 className="title text-center">Producst Details</h5>
+                    <h5 className="title text-center">Product Details</h5>
                     {productDescription && (
                         <div dangerouslySetInnerHTML={{ __html: productDescription }} />
                     )}
