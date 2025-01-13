@@ -55,7 +55,7 @@ const ManagePage = () => {
 
 
         const response = await axios.post(
-          'http://localhost:8080/api/feedback/getFeedback',
+          'https://www.backend.csms.io.vn/api/feedback/getFeedback',
           requestData
         );
         console.log(response.data.data);
@@ -100,7 +100,7 @@ const ManagePage = () => {
     if (searchBy === 'date') {
       const { name, value } = e.target;
       const newDateRange = { ...dateRange, [name]: value };
-      
+
       if (validateDateRange(newDateRange.from, newDateRange.to)) {
         setDateRange(newDateRange);
         setSearchTerm(JSON.stringify(newDateRange)); // Convert to string for API
@@ -117,7 +117,7 @@ const ManagePage = () => {
     setSearchTerm('');
     setDateRange({ from: '', to: '' });
     setDateError('');
-    
+
     setSearchQuery('');
   };
 
@@ -134,7 +134,7 @@ const ManagePage = () => {
     } else {
       setSearchQuery(searchTerm);
     }
-    
+
     setIsSearch(!isSearch);
     setPage(1);
   };
@@ -190,7 +190,7 @@ const ManagePage = () => {
         }));
 
       const response = await axios.post(
-        'http://localhost:8080/api/feedback/predict',
+        'https://www.backend.csms.io.vn/api/feedback/predict',
         selectedFeedbacks
       );
 
@@ -208,10 +208,6 @@ const ManagePage = () => {
         });
 
         setSelectedItems([]);
-        setFilterPredict('all');
-        setPage(1);
-        setSearchQuery('');
-        setSearchTerm('');
         swtoast.success({
           text: response.data.message || 'Predict successfully!'
         });
@@ -343,15 +339,15 @@ const ManagePage = () => {
               </thead>
               <tbody className="block md:table-row-group">
                 {filteredFeedbacks.map((feedback) => (
-                  <tr 
-                    key={feedback.feedback_id} 
+                  <tr
+                    key={feedback.feedback_id}
                     className="hover:bg-gray-200 block md:table-row mb-6 md:mb-0 cursor-pointer"
                     onClick={(e) => {
                       // Không trigger khi click vào checkbox để tránh double toggle
                       handleSelectItem(feedback.feedback_id);
                     }}
                   >
-                    <td 
+                    <td
                       className="border border-gray-300 py-2 px-2 md:px-4 text-center w-full md:w-[5%] block md:table-cell"
                       onClick={(e) => e.stopPropagation()} // Ngăn chặn event bubbling khi click vào td chứa checkbox
                     >
