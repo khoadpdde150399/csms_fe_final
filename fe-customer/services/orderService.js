@@ -26,7 +26,9 @@ const orderService = {
     placeOrder: async (data) => {
         return await axiosJWT.post('/order/create', data);
     },
-
+    placeOrderPayOs: async (data) => {
+        return await axiosJWT.post('/order/createPayos', data);
+    },
     cancelOrder: async (orderId) => {
         return await axiosClient.put(`/order/change-status/${orderId}/5`);
     },
