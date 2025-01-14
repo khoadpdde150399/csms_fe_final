@@ -3,17 +3,20 @@ import { menu } from '../data/data';  // Giả sử bạn đã khai báo menu tr
 import router from 'next/router';
 import useAdminStore from '@/store/adminStore';  // Giả sử đây là store quản lý trạng thái đăng nhập
 
-// Hàm tùy chỉnh menu dựa trên role_id
 const getMenuByRole = (role_id) => {
     if (role_id === 1) {
         // Admin (role_id = 1): Hiển thị tất cả trừ "Tin Nhắn"
-        return menu.filter(item => item.title !== 'Message Management');
+        return menu.filter(item => item.title !== 'Message Management' && item.title !== 'Shipping Management');
     } else if (role_id === 3) {
         // Staff (role_id = 3): Chỉ hiển thị "Quản lý sản phẩm" và "Tin Nhắn"
         return menu.filter(item => item.title === 'Products Management' || item.title === 'Message Management');
+    } else if (role_id === 4 || role_id === 5) {
+        // Roles 4 và 5: Chỉ hiển thị "Shipping Management"
+        return menu.filter(item => item.title === 'Shipping Management');
     } else {
-        // Trường hợp khác: Không hiển thị gì hoặc xử lý mặc định
-        return [];
+        // Trường hợp khác: Chuyển hướng về /login
+        router.push('/login');
+        return []; // Trả về một mảng rỗng hoặc không cần thiết
     }
 };
 

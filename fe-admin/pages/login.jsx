@@ -61,7 +61,11 @@ const LoginPage = () => {
                     Router.push('/user/manage');  // Admin vào trang quản trị
                 } else if (role_id === 3) {
                     Router.push('/staff/dashboard');  // Staff vào trang dành cho nhân viên
-                } else {
+                } else if (role_id === 4 || role_id === 5){
+                
+                    Router.push('/order/schedule/manage');
+                }
+                else {
                     Router.push('/');  // Redirect về trang mặc định nếu role_id không khớp
                 }
             }
