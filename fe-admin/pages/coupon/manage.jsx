@@ -51,7 +51,7 @@ const CouponManagementPage = () => {
 
     if (sortColumn) {
       sortedData.sort((a, b) => {
-        if (sortColumn === 'created_at') {
+        if (sortColumn === 'created_at' || sortColumn === 'end_at' ) {
           return sortDirection === 'asc'
             ? new Date(a[sortColumn]) - new Date(b[sortColumn])
             : new Date(b[sortColumn]) - new Date(a[sortColumn]);
@@ -93,51 +93,73 @@ const CouponManagementPage = () => {
             <thead className="w-100 align-middle text-center">
               <tr className="fs-6 w-100">
                 <th
-                  title="Coupon code name"
-                  className="name col-infor-product"
-                  onClick={() => handleSort('code')}
-                  style={{ width: '15%' }}
-                >
-                  Discount code
-                  {sortColumn === 'code' && (
-                    <span>{sortDirection === 'asc' ? <CaretUpOutlined /> : <CaretDownOutlined />}</span>
-                  )}
-                </th>
-                <th
-                  title="Money"
-                  className="col-money"
-                  onClick={() => handleSort('money')}
-                  style={{ width: '20%' }}
-                >
-                  Price
-                  {sortColumn === 'money' && (
-                    <span>{sortDirection === 'asc' ? <CaretUpOutlined /> : <CaretDownOutlined />}</span>
-                  )}
-                </th>
-                <th
-                  title="Creation time"
-                  className="col-createAt"
-                  onClick={() => handleSort('created_at')}
-                  style={{ width: '20%' }}
-                >
-                  Date created
-                  {sortColumn === 'created_at' && (
-                    <span>{sortDirection === 'asc' ? <CaretUpOutlined /> : <CaretDownOutlined />}</span>
-                  )}
-                </th>
-                <th
-                  title="Status"
-                  onClick={() => handleSort('status')}
-                  style={{ width: '20%' }}
-                >
-                  Status
-                  {sortColumn === 'status' && (
-                    <span>{sortDirection === 'asc' ? <CaretUpOutlined /> : <CaretDownOutlined />}</span>
-                  )}
-                </th>
-                <th title="Operation" className="col-action manipulation" style={{ width: '20%' }}>
-                Operation
-                </th>
+    title="Coupon code name"
+    className="name col-infor-product"
+    onClick={() => handleSort('code')}
+    style={{ width: '15%' }}
+>
+    Discount code
+    {sortColumn === 'code' && (
+        <span>{sortDirection === 'asc' ? <CaretUpOutlined /> : <CaretDownOutlined />}</span>
+    )}
+</th>
+<th
+    title="Money"
+    className="col-money"
+    onClick={() => handleSort('money')}
+    style={{ width: '10%' }} 
+>
+    Price
+    {sortColumn === 'money' && (
+        <span>{sortDirection === 'asc' ? <CaretUpOutlined /> : <CaretDownOutlined />}</span>
+    )}
+</th>
+<th
+    title="Creation time"
+    className="col-createAt"
+    onClick={() => handleSort('created_at')}
+    style={{ width: '25%' }} 
+>
+    Date created
+    {sortColumn === 'created_at' && (
+        <span>{sortDirection === 'asc' ? <CaretUpOutlined /> : <CaretDownOutlined />}</span>
+    )}
+</th>
+<th
+    title="End time"
+    className="col-createAt"
+    onClick={() => handleSort('end_at')}
+    style={{ width: '25%' }}
+>
+    Date End
+    {sortColumn === 'end_at' && (
+        <span>{sortDirection === 'asc' ? <CaretUpOutlined /> : <CaretDownOutlined />}</span>
+    )}
+</th>
+<th
+    title="Quantity"
+    className="col-createAt"
+    onClick={() => handleSort('quantity')}
+    style={{ width: '10%' }}  
+>
+    Quantity
+    {sortColumn === 'quantity' && (
+        <span>{sortDirection === 'asc' ? <CaretUpOutlined /> : <CaretDownOutlined />}</span>
+    )}
+</th>
+<th
+    title="Status"
+    onClick={() => handleSort('status')}
+    style={{ width: '10%' }} 
+>
+    Status
+    {sortColumn === 'status' && (
+        <span>{sortDirection === 'asc' ? <CaretUpOutlined /> : <CaretDownOutlined />}</span>
+    )}
+</th>
+<th title="Operation" className="col-action manipulation" style={{ width: '5%' }}>
+    Operation
+</th>
               </tr>
             </thead>
           <tbody>
@@ -149,6 +171,8 @@ const CouponManagementPage = () => {
                   id={productVariant.id}
                   code={productVariant.code}
                   money={productVariant.money}
+                  end_at= {productVariant.end_at}
+                  quantity= {productVariant.quantity}
                   status={productVariant.status}
                   created_at={productVariant.created_at}
                   refreshCouponTable={refreshCouponTable}
