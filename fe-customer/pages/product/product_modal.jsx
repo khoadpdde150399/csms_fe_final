@@ -18,7 +18,36 @@ import { formatPrice, formatRate } from '../../helpers/format.js';
 import Login from '../../components/login';
 import Register from '../../components/register';
 import ForgotPass from '../../components/forgotpass';
-
+const styles = {
+    actionBox: {
+        margin: '20px 0',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '15px'
+    },
+    quantitySection: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '20px'
+    },
+    inventoryStatus: {
+        color: '#dc3545', // màu đỏ của bootstrap
+        // hoặc có thể dùng '#ff0000' hoặc 'red'
+        fontSize: '14px',
+        fontWeight: '500' // có thể thêm để làm nổi bật hơn
+    },
+    addToCartButton: {
+        background: '#000',
+        color: 'white',
+        padding: '12px 20px',
+        cursor: 'pointer',
+        width: '30%',
+        textAlign: 'center',
+        borderRadius: '4px',
+        transition: 'all 0.3s ease',
+        marginLeft: '250px'
+    }
+};
 const ProductDetailModal = ({ product_id, colour, onClose }) => {
     const router = useRouter();
     const [isLogInOpen, setIsLogInOpen] = useState(false);
@@ -99,38 +128,44 @@ const ProductDetailModal = ({ product_id, colour, onClose }) => {
         setIsRegisterOpen(false);
         setIsForgotOpen(false);
     };
+    
     const handleAddToCart = () => {
-        const product = {
-            productVariantId: productVariantId,
-            name: productName,
-            colour: colourList[selectedColourIndex].colour_name,
-            size: sizeList[selectedSizeIndex].size_name,
-            image: productImageList[0],
-            price: price,
-            inventory: inventory,
-            quantity: quantity
-        };
-    
-        // Thêm sản phẩm vào giỏ hàng
-        addToCart(product);
-        
-        // Đặt lại số lượng sản phẩm
-        setQuantity(1);
-    
-        // Hiển thị thông báo thành công
-        if (!isErrorInCart) {
-            // swtoast.success({ text: 'Product added to cart successfully' });
-            if (!isLoggedIn && !isUserLoggedIn) {
-                setIsLogInOpen(true); // Mở form đăng nhập
-            }
-            else{
-                router.push('/cart');
-            }
-        }
-    
-        // Kiểm tra đăng nhập
-        
+    // Kiểm tra xem hàng tồn kho có đủ không
+    if (inventory < 1) {
+        swtoast.error({ text: 'Product is out of stock' });
+        return; // Không chuyển trang nếu hàng đã hết
+    }
+
+    const product = {
+        productVariantId: productVariantId,
+        name: productName,
+        colour: colourList[selectedColourIndex].colour_name,
+        size: sizeList[selectedSizeIndex].size_name,
+        image: productImageList[0],
+        price: price,
+        inventory: inventory,
+        quantity: quantity
     };
+
+    // Thêm sản phẩm vào giỏ hàng
+    addToCart(product);
+    
+    // Đặt lại số lượng sản phẩm
+    setQuantity(1);
+
+    // Hiển thị thông báo thành công
+    if (!isErrorInCart) {
+        swtoast.success({ text: 'Product added to cart successfully' });
+        if (!isLoggedIn && !isUserLoggedIn) {
+            setIsLogInOpen(true); // Mở form đăng nhập
+        }
+        else{
+            router.push('/cart');
+        }
+    }
+
+    // Kiểm tra đăng nhập
+};
     return (
         <div className="product-detail-page container">
             {!isLoggedIn && !isUserLoggedIn && (
@@ -243,16 +278,24 @@ const ProductDetailModal = ({ product_id, colour, onClose }) => {
                                 })}
                         </div>
                     </div>
-                    <div className="action-box row">
-                        <ProductQuantityInput quantity={quantity} setQuantity={setQuantity} />
+                  <div style={styles.actionBox}>
+                        <div style={styles.quantitySection}>
+                            <ProductQuantityInput 
+                                quantity={quantity} 
+                                setQuantity={setQuantity}
+                                max={inventory || 0}
+                            />
+                            <div style={styles.inventoryStatus}>
+                                <span>{inventory || 0} products available</span>
+                            </div>
+                        </div>
                         <div
-                            className="add-product-to-cart-button border-radius col-7 d-flex justify-content-around align-items-center"
+                            style={styles.addToCartButton}
                             onClick={handleAddToCart}
                         >
                             Buy Now
                         </div>
                     </div>
-
                 </div>
             </div>
             <style jsx>{`
