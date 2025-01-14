@@ -22,10 +22,10 @@ const CouponAdmin = (props) => {
         const minutes = date.getMinutes(); // phút
         const seconds = date.getSeconds(); // giây
         const formattedDate = `${day}/${month}/${year}`;
-        const formattedTime = `${hours}:${minutes}:${seconds}`;
+        const formattedTime = `${hours}:${minutes}`;
         return (
             <>
-                {formattedDate} <br /> {formattedTime}
+                {formattedTime} - {formattedDate} 
             </>
         )
     }
@@ -105,6 +105,13 @@ const CouponAdmin = (props) => {
                         <td className="col-createAt">
                             <p>{convertTime(props.created_at)}</p>
                         </td>
+                        <td className="col-createAt">
+                            <p>{convertTime(props.end_at)}</p>
+                        </td>
+                        <td className="col-createAt">
+                            <p>{props.quantity}</p>
+                        </td>
+                        
                         <td className="text-danger fw-bold col-state">
                             <Switch checked={props.status} onChange={handleUpdateState} disabled={disabledInputState} />
                         </td>
